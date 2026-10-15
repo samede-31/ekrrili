@@ -1,0 +1,631 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/fonts/Cairo.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --background: #f7f8f6;
+  --foreground: #17231d;
+  --brand: #17734e;
+  --brand-dark: #10583b;
+  --muted: #65736b;
+  --border: #e2e8e3;
+}
+
+html.dark {
+  color-scheme: dark;
+  --background: #0d1410;
+  --foreground: #e7efe9;
+  --brand: #43b581;
+  --brand-dark: #62ca92;
+  --muted: #a3b2a8;
+  --border: #29382f;
+}
+
+html.dark body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+html.dark :is([class~="bg-white"], [class~="bg-[#f7f8f6]"], [class~="bg-[#f8faf8]"], [class~="bg-[#f7f9f7]"], [class~="bg-[#fafcfa]"], [class~="bg-[#f1f6f2]"], [class~="bg-[#f2f6f3]"]) {
+  background-color: #131d17 !important;
+}
+
+html.dark :is([class~="bg-[#edf5ef]"], [class~="bg-[#edf6ef]"], [class~="bg-[#eaf3ec]"], [class~="bg-[#e8f4ec]"], [class~="bg-emerald-50"], [class~="bg-emerald-50/60"]) {
+  background-color: #183126 !important;
+}
+
+html.dark :is([class~="text-[#17231d]"], [class~="text-[#19271e]"], [class~="text-[#35463b]"], [class~="text-[#34483b]"], [class~="text-[#526159]"], [class~="text-[#536159]"], [class~="text-[#647168]"], [class~="text-[#647269]"], [class~="text-[#718078]"], [class~="text-[#728077]"], [class~="text-[#748078]"], [class~="text-[#758179]"], [class~="text-[#76837a]"], [class~="text-[#77847b]"], [class~="text-[#7a867e]"], [class~="text-[#829087]"], [class~="text-[#849087]"], [class~="text-[#87938a]"], [class~="text-[#8a968e]"], [class~="text-[#96a198]"]) {
+  color: #c4d1c8 !important;
+}
+
+html.dark :is([class~="text-[#17734e]"], [class~="text-[#176744]"], [class~="text-[#145b3e]"], [class~="text-[#10583b]"]) {
+  color: #62ca92 !important;
+}
+
+html.dark :is([class~="border-[#e0e7e1]"], [class~="border-[#e2e8e3]"], [class~="border-[#e4eae5]"], [class~="border-[#e5eae6]"], [class~="border-[#e5ebe6]"], [class~="border-[#e6ebe7]"], [class~="border-[#e8ede8]"], [class~="border-[#e9ede9]"], [class~="border-[#edf1ed]"], [class~="border-[#dce5dd]"], [class~="border-[#dfe6e0]"], [class~="border-[#dfe7e1]"]) {
+  border-color: #29382f !important;
+}
+
+html.dark :is(input, select, textarea) {
+  border-color: #34473b;
+  background-color: #101912;
+  color: #e7efe9;
+}
+
+html.dark select option {
+  background: #131d17;
+  color: #e7efe9;
+}
+
+html.dark .site-preferences {
+  border-color: #34473b;
+  background-color: rgb(19 29 23 / 95%);
+  color: #e7efe9;
+}
+
+html.dark .site-preferences select {
+  color: #e7efe9;
+}
+
+html.dark .rental-agreement-sheet [class~="bg-white"] {
+  background-color: #fff !important;
+}
+
+html.dark .rental-agreement-sheet [class~="text-[#17231d]"],
+html.dark .rental-agreement-sheet [class~="text-[#35463b]"] {
+  color: #17231d !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(4.1rem + env(safe-area-inset-bottom));
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  button {
+    min-height: 44px;
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #80c9a5;
+  outline-offset: 2px;
+}
+
+::selection {
+  background: #c9ead8;
+}
+
+.price-range {
+  pointer-events: none;
+  direction: ltr;
+}
+
+.price-range::-webkit-slider-runnable-track {
+  height: 6px;
+  background: transparent;
+}
+
+.price-range::-moz-range-track {
+  height: 6px;
+  background: transparent;
+}
+
+.price-range::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  appearance: none;
+  border: 3px solid white;
+  border-radius: 999px;
+  background: #17734e;
+  box-shadow: 0 1px 5px rgb(23 55 35 / 28%);
+  pointer-events: auto;
+}
+
+.price-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 3px solid white;
+  border-radius: 999px;
+  background: #17734e;
+  box-shadow: 0 1px 5px rgb(23 55 35 / 28%);
+  pointer-events: auto;
+}
+
+.rental-agreement-sheet,
+.rental-agreement-sheet * {
+  box-sizing: border-box;
+}
+
+.rental-agreement-sheet {
+  direction: rtl;
+  width: 100%;
+  max-width: 210mm;
+  min-height: 297mm;
+  margin-inline: auto;
+  padding: 12mm;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2mm;
+  overflow-wrap: anywhere;
+  background: #fff;
+  color: #1d2c22;
+  font-family: "Cairo", Arial, sans-serif;
+  font-size: 8pt;
+  line-height: 1.45;
+  box-shadow: 0 12px 45px rgb(24 49 32 / 12%);
+}
+
+.agreement-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+  max-width: 100%;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.agreement-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8mm;
+  padding-bottom: 3mm;
+  border-bottom: 0.35mm solid #dce8df;
+}
+
+.agreement-brand {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  color: #145b3e;
+}
+
+.agreement-brand-mark {
+  display: flex;
+  width: 10mm;
+  height: 10mm;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2.5mm;
+  background: #e8f4ec;
+  font-size: 16pt;
+  font-weight: 800;
+}
+
+.agreement-brand strong,
+.agreement-brand small {
+  display: block;
+}
+
+.agreement-brand strong {
+  font-size: 12pt;
+  line-height: 1.2;
+}
+
+.agreement-brand small {
+  direction: ltr;
+  color: #75847a;
+  font-family: Arial, sans-serif;
+  font-size: 6pt;
+  letter-spacing: 1.1pt;
+  text-align: right;
+}
+
+.agreement-meta {
+  color: #52645a;
+  font-size: 7pt;
+  text-align: left;
+}
+
+.agreement-meta p {
+  margin: 0.5mm 0;
+}
+
+.agreement-title-banner {
+  padding: 2.2mm 3mm;
+  border: 0.3mm solid #dfeae1;
+  border-radius: 2mm;
+  background: #f3f8f4;
+  text-align: center;
+}
+
+.agreement-title-banner h1 {
+  margin: 0;
+  color: #145b3e;
+  font-size: 14pt;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.agreement-title-banner p {
+  margin: 0.5mm 0 0;
+  color: #6c7a70;
+  font-size: 7pt;
+}
+
+.agreement-section {
+  border: 0.3mm solid #e2e9e3;
+  border-radius: 2mm;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.agreement-section > h2,
+.agreement-signatures > h2 {
+  margin: 0;
+  padding: 1.2mm 2.5mm;
+  background: #eef6f0;
+  color: #145b3e;
+  font-size: 8pt;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.agreement-party-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2mm;
+  padding: 2mm;
+}
+
+.agreement-party-card {
+  min-width: 0;
+  padding: 1.6mm 2mm;
+  border: 0.25mm solid #e8eee9;
+  border-radius: 1.5mm;
+  background: #fff;
+}
+
+.agreement-party-card h3 {
+  margin: 0 0 1mm;
+  color: #344b3b;
+  font-size: 7.5pt;
+  font-weight: 800;
+}
+
+.agreement-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.35mm;
+  padding: 1mm 1.4mm;
+}
+
+.agreement-field-label {
+  color: #77847b;
+  font-size: 6.4pt;
+  font-weight: 600;
+}
+
+.agreement-field-value {
+  min-width: 0;
+  color: #26372d;
+  font-size: 7.4pt;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.agreement-id-placeholder {
+  display: inline-block;
+  min-width: 38mm;
+  border-bottom: 0.25mm dashed #c6d0c8;
+  color: #7b887f;
+  font-size: 6.6pt;
+  font-weight: 400;
+}
+
+.agreement-item-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1mm;
+  padding: 1.6mm;
+}
+
+.agreement-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1mm;
+  padding: 1.5mm;
+}
+
+.agreement-summary-grid .agreement-field {
+  min-height: 17mm;
+  justify-content: center;
+  border-radius: 1.4mm;
+  background: #f7faf7;
+}
+
+.agreement-summary-grid .agreement-field-value {
+  color: #145b3e;
+  font-size: 7.2pt;
+}
+
+.agreement-terms ul {
+  display: grid;
+  gap: 1mm;
+  margin: 0;
+  padding: 2mm 7mm 2mm 2.5mm;
+  color: #35443a;
+  font-size: 7pt;
+  line-height: 1.55;
+}
+
+.agreement-terms li {
+  padding-inline-start: 0.5mm;
+}
+
+.agreement-terms strong {
+  color: #344b3b;
+}
+
+.agreement-signatures {
+  margin-top: auto;
+  border: 0.3mm solid #e2e9e3;
+  border-radius: 2mm;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.agreement-signature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5mm;
+  padding: 2.2mm;
+}
+
+.agreement-signature-box {
+  min-height: 22mm;
+  padding: 1.8mm 2.2mm;
+  border: 0.35mm dashed #aebbb1;
+  border-radius: 1.5mm;
+  color: #344b3b;
+}
+
+.agreement-signature-box > strong {
+  font-size: 7.4pt;
+}
+
+.agreement-signature-line {
+  display: flex;
+  align-items: end;
+  gap: 2mm;
+  margin-top: 2.2mm;
+  color: #77847b;
+  font-size: 6.5pt;
+}
+
+.agreement-date-line {
+  flex: 1;
+  height: 3mm;
+  border-bottom: 0.25mm solid #d9e0da;
+}
+
+.agreement-footer {
+  padding-top: 1mm;
+  color: #8b968e;
+  font-size: 6pt;
+  text-align: center;
+}
+
+.agreement-verification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4mm;
+  padding: 2.5mm 3mm;
+  border: 0.3mm solid #dce6de;
+  border-radius: 2mm;
+  background: #f7faf7;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.agreement-verification strong {
+  font-size: 8pt;
+}
+
+.agreement-verification p,
+.agreement-verification a,
+.agreement-verification small {
+  display: block;
+  margin-top: 1mm;
+  color: #68776d;
+  font-size: 6.5pt;
+  overflow-wrap: anywhere;
+}
+
+.agreement-verification img,
+.agreement-qr-placeholder {
+  flex: 0 0 auto;
+  width: 28mm;
+  height: 28mm;
+}
+
+.agreement-qr-placeholder {
+  display: block;
+  border: 0.3mm dashed #c9d5cb;
+  border-radius: 1mm;
+}
+
+@media (max-width: 640px) {
+  .rental-agreement-sheet {
+    min-height: 0;
+    padding: 5mm;
+    gap: 2mm;
+  }
+
+  .agreement-header {
+    gap: 3mm;
+  }
+
+  .agreement-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .agreement-summary-grid .agreement-field {
+    min-height: 15mm;
+  }
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  html.dark {
+    color-scheme: light;
+  }
+
+  html.dark .rental-agreement-sheet,
+  html.dark .rental-agreement-sheet * {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #rental-agreement,
+  #rental-agreement * {
+    visibility: visible !important;
+  }
+
+  #rental-agreement {
+    position: absolute !important;
+    inset: 0 auto auto 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 12mm !important;
+    gap: 1.7mm !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .agreement-header,
+  .agreement-title-banner,
+  .agreement-party-card,
+  .agreement-item-grid,
+  .agreement-summary-grid,
+  .agreement-terms,
+  .agreement-signature-box {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .agreement-screen-only {
+    display: none !important;
+  }
+
+  .app-bottom-nav {
+    display: none !important;
+  }
+
+  .agreement-title-banner {
+    padding-block: 1.6mm;
+  }
+
+  .agreement-title-banner h1 {
+    font-size: 13pt;
+  }
+
+  .agreement-section > h2,
+  .agreement-signatures > h2 {
+    padding-block: 0.8mm;
+  }
+
+  .agreement-party-grid,
+  .agreement-item-grid,
+  .agreement-summary-grid {
+    padding: 1mm;
+  }
+
+  .agreement-party-card {
+    padding-block: 1mm;
+  }
+
+  .agreement-field {
+    padding-block: 0.6mm;
+  }
+
+  .agreement-field-value {
+    line-height: 1.35;
+  }
+
+  .agreement-summary-grid .agreement-field {
+    min-height: 14mm;
+  }
+
+  .agreement-terms ul {
+    gap: 0.5mm;
+    padding-block: 1mm;
+    font-size: 6.7pt;
+    line-height: 1.4;
+  }
+
+  .agreement-signature-grid {
+    padding: 1.5mm;
+  }
+
+  .agreement-signature-box {
+    min-height: 19mm;
+  }
+}
